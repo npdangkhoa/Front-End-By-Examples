@@ -1,0 +1,30 @@
+﻿body
+{
+    
+}
+#header{
+    text-align: center;
+    height: 100px;
+}
+
+#links{
+    float: left;
+    width: 100px;
+
+    background-color: blue;
+}
+#authorinfo{
+    float: left;
+    width: 300px;
+    background-color: yellow;
+
+}
+#content{
+    float: left;
+    width: 800px;
+   background-color: greenyellow;
+
+}
+
+
+
