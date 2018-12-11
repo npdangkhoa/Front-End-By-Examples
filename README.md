@@ -1,1 +1,2 @@
 # css-examples
+# jquery-examples
