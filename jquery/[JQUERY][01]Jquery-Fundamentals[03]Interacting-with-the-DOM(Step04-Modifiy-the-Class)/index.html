@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Index</title>
+    <style type="text/css">
+        .BlueDiv { background-color: Navy; color:White;width:200px;}
+        .RedDiv { background-color: Red; color:White; width:200px;}
+        .style1
+        {
+            width: 100%;
+        }
+        .Highlight {background-color: yellow}
+    </style>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //01) Iterating Through Nodes Demo
+                // This will impart performance 
+                var output = $('#outputDiv');
+                console.log(output.html());
+                $('div.BlueDiv, div.RedDiv').each(function(index, object){
+                    output.html(output.html() + ' ' + index +' : '+ object.textContent + ' : ' + $(this).text());
+                });
+
+                // improve performance 
+                var output2 = $('#outputDiv2');
+                var html = output2.html();
+                $('div.BlueDiv, div.RedDiv').each(function(index, element){
+                    html = html + ':' + index + ':' + $(element).text() + ':' + $(this).text();
+                });
+                output2.html(html);
+             
+            //02) Modifiying properties and attribute 
+                $('div.BlueDiv, div.RedDiv').each(function(index){
+
+                    // raw DOM object
+                    this.title = 'the title of item ' + index;
+                    console.log(this.textContent);
+                    
+                    // raw jquery
+                    $(this).attr({
+                        title: 'some thing like title',
+                        style: 'font-size: 14pt; background-color: yellow; color: green'
+
+                    });
+
+                });
+
+            //add and remove mode 
+            var tbc = $('#TableContainerDiv');
+            tbc.append('<span style="background-color: green">Append Child 01 </span>');
+            tbc.prepend('<span style="background-color: green">Prepend Child 01 </span>');
+            $('<br/><span style="background-color: green">Append Child 02</span>').appendTo(tbc);
+            $('<span style="background-color: green">Prepend Child 02</span><br/>').prependTo(tbc);
+                
+            //wrap example
+            $('span.Foo').wrap('<div class = "RedDiv ParentWrapper"/>');
+
+            $('div.ParentWrapper').each(function(){
+                console.log($(this).html());
+            });
+
+            //remove 
+            //$('div.ParentWrapper').remove();
+
+            // modifiy the class
+            //$('input[type="text"]').addClass("Highlight");
+          
+
+        });
+
+        function Blur(element){
+            $(element).toggleClass('Highlight');
+        }
+
+        function Focus(element){
+            $(element).toggleClass('Highlight');
+        }
+    </script>
+</head>
+<body>
+    <div id="TestDiv" title="Div Title asdf asdfsdf asdf">
+        This is my div text
+    </div>
+    <div title="Contains Table" id="TableContainerDiv">
+        <table id="DataTable">
+          <tr>
+             <td class = 'Foo'>Cell 1 Row 1</td>
+          </tr>
+          <tr>
+             <td  class = 'Foo'>Cell 1 Row 2</td>
+          </tr>
+          <tr>
+             <td  class = 'Foo'>Cell 1 Row 3</td>
+          </tr>
+          <tr>
+             <td>
+                <table style="width:100%">
+                    <tr>
+                        <td>Nested Table Cell and Row</td>
+                    </tr>
+                </table>
+             </td>
+          </tr>
+        </table>
+    </div>
+    <span id="outputDiv">This is the content:  </span>
+    <br/>
+    <span id="outputDiv2">This is the content:  </span>
+
+
+    <div class="BlueDiv">
+        <span>Blue div</span>
+    </div>
+    <br />
+    <span class="Foo">Span 01</span>
+
+    <span class="Foo">Span 02</span>
+
+    <span class="Foo">Span 03</span>
+
+    <br />
+    <div class="RedDiv">
+        <span>Red div</span>
+    </div>
+    <p>
+        <img src="Images/pluralsight.png" />
+    </p>
+
+    <form id="form1" runat="server">
+        <table style="width:300px;">
+            <tr>
+                <td style="width:30%;">First Name</td>
+                <td style="width:70%;"><input id="FirstNameTextBox" value="John" type="text" onblur="Blur(this)" onfocus="Focus(this)"/></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input id="LastNameTextBox" type="text"  onblur="Blur(this)" onfocus="Focus(this)"/></td>
+            </tr>
+            <tr>
+                <td>Comments</td>
+                <td><textarea rows="5" cols="60" id="CommentsTextBox" onblur="Blur(this)" onfocus="Focus(this)">TextArea</textarea></td>
+            </tr>           
+            <tr>
+                <td>
+                <select id="sel">
+                    <option value="AZ">AZ</option>
+                    <option value="CA" selected="true">CA</option>
+                </select></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><input id="SubmitButton" type="button" value="Submit" /></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>  
+
+    </form>
+</body>
+</html>
+
