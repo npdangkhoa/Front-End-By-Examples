@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Index</title>
+    <style type="text/css">
+        td {text-align:left;vertical-align:top;}
+        .BlueDiv { background-color: Navy; color:White;width:200px;}
+        .RedDiv { background-color: Red; color:White; width:200px;}
+        .Highlight { background-color:Yellow;}
+        .LightHighlight { background-color: #ccc;}
+        .PhoneHighlight { background-color:#ccc;}
+        .PhoneNumber { margin-top:5px;width:80px;}
+        .PhoneType { margin-top:5px;}
+        .PhoneNumberDiv {text-align:left; vertical-align:middle; width:200px;float:left;margin-bottom:5px; height:30px; }
+        .PhoneTypeDiv { text-align:left; vertical-align:middle;width:100px;float:left; height:30px; }
+        </style>
+    <script src="Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            submitEvent();
+        });
+        function submitEvent(){
+            $('#MyDiv').on('mouseenter mouseleave mouseup', function(even){
+                console.log(this);
+                var html = $(this).html();
+                $(this).toggleClass('Highlight');
+                $(this).css('cursor','pointer');
+
+                if (even.type == 'mouseup'){
+                    $(this).text('X:' + even.pageX + ' Y: ' + even.pageY);
+                } 
+            });
+            $('#MyDiv').off();
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="MyDiv">This is some text</div>
+    <form id="form1" runat="server">
+        <table id="MyTable" style="width:300px;" cellpadding="5">
+            <tr>
+                <td style="width:30%;">First Name</td>
+                <td style="width:70%;">
+                <input class="MyInput" id="FirstNameTextBox" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input class="MyInput" id="LastNameTextBox" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Comments</td>
+                <td><textarea class="MyInput" rows="5" cols="60" id="CommentsTextBox"></textarea></td>
+            </tr>   
+            <tr>
+                <td>Phone</td>
+                <td>
+                    <input type="button" id="AddPhone" value="Add Phone" class="MyInput" />
+                    <div id="PhonesDiv" style="margin-top:10px;">
+                        <div class="PhoneTypeDiv">
+                            <select class="PhoneType">
+                                <option value="">Select One:</option>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Office">Office</option>
+                            </select>
+                        </div>
+                        <div class="PhoneNumberDiv">
+                            <input type="text" class="PhoneNumber" maxlength="12" />
+                        </div>
+                    </div>
+                </td>
+            </tr>        
+            <tr>
+                <td>
+                    State
+                </td>
+                <td>
+                    <select id="StatesSelect" class="MyInput">
+                        <option value="AZ">AZ</option>
+                        <option value="CA" selected="true">CA</option>
+                    </select>                
+                </td>
+            </tr>
+            <tr>
+                <td><input id="SubmitButton" type="button" value="Submit" /></td>
+                <td>
+                    <div id="DivOutput"></div>
+                </td>
+            </tr>
+        </table>  
+    </form>
+    <script type="text/javascript">
+        //Handle events the old-fashioned way
+        //        var button = document.getElementById('SubmitButton');
+        //        if (document.addEventListener) {
+        //            button.addEventListener('click', function () { alert('Clicked Button'); }, false);
+        //        }
+        //        else {
+        //            button.attachEvent('onclick', function () { alert('Clicked IE Button'); });
+        //        }
+    </script>
+</body>
+</html>
