@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Filter By: </div>
+      <div class="col-md-4">
+        <input type="text" [(ngModel)]='listFilter' name="filterBy" id="filterBy" >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Filter By: {{listFilter}}</h4>
+      </div>
+    </div>
+    <div class="table-responsive table-bordered table">
+      <table class="table" *ngIf='bikers && bikers.length'>
+        <thead>
+          <tr class="text-center">
+            <th class="btn btn-primary"
+                (click)="toggleImage()" >
+                {{showImage ? 'Hide':'Show'}} Image
+            </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Salary</th>
+            <th>5 Star Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let biker of filterBikers'>
+                <th style="width:15%" class="text-center">
+                    <img  *ngIf='showImage'
+                         src={{biker.image}} 
+                         alt="{{biker.name}}"
+                         class="img-fluid rounded-circle w-100 img-responsive " 
+                         > 
+                      </th>
+                <th style="width:20%">{{biker.name }}</th>
+                <th style="width:20%">{{biker.email}}</th>
+                <th style="width:20%">{{biker.phone | convertToSpace:'-' }}</th>
+                <th style="width:20%">{{biker.salary | currency:'USD':'symbol': '1.2-2'}}</th>
+                <th style="width:20%">{{biker.starRating}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>
