@@ -58,6 +58,10 @@ export class BikerListComponent{
         this.listFilter = 'Davis';
     }
 
+    onRatingClicked(message: String): void {
+        this.pageTitle = 'Bikers List: ' + message;
+    }
+
     toggleImage(): void {
         this.showImage = !this.showImage;
     };

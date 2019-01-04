@@ -31,25 +31,29 @@
         </thead>
         <tbody>
           <tr *ngFor='let biker of filterBikers'>
-                <th style="width:15%" class="text-center">
+                <th style="width:20%" class="text-center">
                     <img  *ngIf='showImage'
                          src={{biker.image}} 
                          alt="{{biker.name}}"
                          class="img-fluid rounded-circle w-100 img-responsive " 
                          > 
                       </th>
-                <th style="width:20%">{{biker.name }}</th>
-                <th style="width:20%">{{biker.email}}</th>
-                <th style="width:20%">{{biker.phone | convertToSpace:'-' }}</th>
-                <th style="width:20%">{{biker.salary | currency:'USD':'symbol': '1.2-2'}}</th>
-                <th style="width:20%">{{biker.starRating}}</th>
+                <th style="width:15%">{{biker.name }}</th>
+                <th style="width:15%">{{biker.email}}</th>
+                <th style="width:15%">{{biker.phone | convertToSpace:'-' }}</th>
+                <th style="width:15%">{{biker.salary | currency:'USD':'symbol': '1.2-2'}}</th>
+                <th style="width:20%"><pm-star [rating] = 'biker.starRating'
+                                               (notify) = 'onRatingClicked($event)'>
+                                      </pm-star>
+                </th>
           </tr>
         </tbody>
       </table>
     </div>
 
   </div>
-  <div class="card-footer text-muted">
+  
+  <div class="card-footer text-muted">)
     Footer
   </div>
 </div>
