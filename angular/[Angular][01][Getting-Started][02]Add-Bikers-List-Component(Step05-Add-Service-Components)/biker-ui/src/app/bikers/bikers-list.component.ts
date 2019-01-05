@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IBiker } from './biker';
+import { BikersService } from './bikers.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'pm-bikers',
@@ -8,54 +10,36 @@ import { IBiker } from './biker';
 export class BikerListComponent{
     showImage: boolean = true;
     pageTitle: String = 'Bikers List';
-    private _listFilter: string = 'Davis';
+    private _listFilter: string;
 
     filterBikers: IBiker[];
-    bikers: IBiker[] = [
-        {
-        "id": 1001,
-        "name": "samantha Davis",
-        "email": "samantha@gmail.com",
-        "phone": "4448-295-55555",
-        "model": "Golval-carbon",
-        "serialNumber": null,
-        "birthday": "2110-01-08T17:00:00.000+0000",
-        "starRating": 3.4,
-        "salary":3400,
-        "image": "http://blog.mola-light.com/wp-content/uploads/2013/01/007_FaceBike_JE12113_Final.jpg"
-        },
-        {
-        "id": 1002,
-        "name": "Warren Davis",
-        "email": "davis@gmail.com",
-        "phone": "4448-295-55555",
-        "model": "Golval-carbon",
-        "serialNumber": null,
-        "birthday": "2110-01-08T17:00:00.000+0000",
-        "starRating": 4.4,
-        "salary":4400,
-        "image": "http://blog.mola-light.com/wp-content/uploads/2013/01/008_FaceBike_JE12157_Final.jpg"
+    bikers: IBiker[];
 
-        },
-        {
-        "id": 1003,
-        "name": "Tomy Ngo",
-        "email": "Tomy@gmail.com",
-        "phone": "4448-295-55555",
-        "model": "Golval-carbon",
-        "serialNumber": null,
-        "birthday": "2110-01-08T17:00:00.000+0000",
-        "starRating": 5.0,
-        "salary":5400,
-        "image": "http://blog.mola-light.com/wp-content/uploads/2013/01/013_FaceBike_JE11923_Final.jpg"
+    observerbleBikes: Observable<IBiker[]>;
+    errorMessage: String;
+
+    constructor(private bikersService: BikersService){
+        console.log(">>>>>>>>>>constructor");
+        this.observerbleBikes = this.bikersService.getBikers();
+        this.observerbleBikes.subscribe(
+            bikes => {
+                this.bikers = bikes;
+                this.filterBikers = this.bikers;
+            },
+            error => this.errorMessage = <any>error
+        );
+        
+        bikes => {
+            this.bikers = bikes;
+            this.filterBikers = this.bikers;
         }
-        ];
 
 
-    constructor(){
-        console.log('constructor of list biker');
-        this.filterBikers = this.bikers;
-        this.listFilter = 'Davis';
+    }
+
+    ngOnInit(): void {
+        console.log(">>>>>>>>>>ngOnInit");
+
     }
 
     onRatingClicked(message: String): void {
@@ -69,6 +53,7 @@ export class BikerListComponent{
     public get listFilter(): string {
         return this._listFilter;
     }
+
     public set listFilter(value: string) {
         console.log('filter by:' + value);
         this._listFilter = value;
