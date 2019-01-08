@@ -1,6 +1,13 @@
-<div>
-  <h1>{{pageTitle}}</h1>
-  <div>
-    <pm-bikers></pm-bikers>
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand">{{pageTitle}}</a>
+   <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="nav nav-pills">
+      <li><a class="nav-link" href="/welcome">Home</a></li>
+      <li><a class="nav-link" href="/bikers">Bikers List</a></li>
+    </ul>
   </div>
+</nav>
+
+<div class="container">
+    <router-outlet></router-outlet>
 </div>

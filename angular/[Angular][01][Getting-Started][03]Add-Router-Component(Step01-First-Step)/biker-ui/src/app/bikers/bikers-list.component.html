@@ -38,7 +38,7 @@
                          class="img-fluid rounded-circle w-100 img-responsive " 
                          > 
                       </th>
-                <th style="width:15%">{{biker.name }}</th>
+                <th style="width:15%"><a [routerLink]="['/bikers', biker.id]">{{biker.name }} </a></th>
                 <th style="width:15%">{{biker.email}}</th>
                 <th style="width:15%">{{biker.phone | convertToSpace:'-' }}</th>
                 <th style="width:15%">{{biker.salary | currency:'USD':'symbol': '1.2-2'}}</th>
