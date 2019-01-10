@@ -1,4 +1,5 @@
 function addAsyn(x, y, cb){
+	// init value to get return value
 	var result = 0;
 	 setTimeout(result = cb (x, y), 1000);
 	 return result;
