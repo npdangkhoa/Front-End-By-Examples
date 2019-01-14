@@ -18,7 +18,7 @@ function output(text) {
 }
 
 // **************************************
-// there are two slow of process.
+// there are two flow of process.
 // flow 01: resp -> resp = text   -> cb(resp)   -> end.
 // flow 02: resp -> (resp = cb)   -> resp(text) -> end.
 function getFile(file) {
@@ -29,27 +29,11 @@ function getFile(file) {
 		else resp = text;
 	});
 
-	return function thunkXX(cb){
+	return function(cb){
 		if (!resp) resp = cb
 		else cb(resp);
 	};
 }
-
-
-
-// function getFile2(file) {
-// 	var resp;
-
-// 	fakeAjax(file,function(text){
-// 		if (!resp) resp = text;
-// 		else resp(text);
-// 	});
-
-// 	return function th(cb) {
-// 		if (resp) cb(resp);
-// 		else resp = cb;
-// 	};
-// }
 
 
 var thunksFile1 = getFile("file1");
