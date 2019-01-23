@@ -4,23 +4,33 @@ import * as serviceWorker from './serviceWorker';
 
 
 const Card = (props) => {
-    return(
-        <div>card</div>
-    );
-}
-
-const ListCards = (props) => {
-    return(
+    return (
         <div>
-            <Card></Card>
-            <div>List Card</div>
+            <img width='90' src="https://assets.entrepreneur.com/content/3x2/2000/20170130170703-GettyImages-539953664.jpeg" />
+            <div>
+                <div>Name...</div>
+                <div>Company Name ...</div>
+            </div>
+
         </div>
     );
 }
 
-class App extends React.Component{
+const ListCards = (props) => {
+    return (
+        <div>
+            <Card></Card>
+            <Card></Card>
+            <Card></Card>
+            <Card></Card>
 
-    render(){
+        </div>
+    );
+}
+
+class App extends React.Component {
+
+    render() {
         return (
             <div>
                 <ListCards></ListCards>
@@ -34,7 +44,7 @@ class App extends React.Component{
 
 
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 
