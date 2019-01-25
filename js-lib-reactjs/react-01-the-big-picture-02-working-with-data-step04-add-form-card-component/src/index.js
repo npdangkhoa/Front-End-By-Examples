@@ -3,31 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
-var data = [{
-        "key": 2013,
-        "avatar_url": "https://avatars1.githubusercontent.com/u/2013?v=4",
-        "name": "Jeff Smith",
-        "company": null,
-        "blog": "http://jeffsmith.me",
-        "location": "Amherst, Nova Scotia",
-    },
-    {
-        "key": 2015,
-        "avatar_url": "https://avatars1.githubusercontent.com/u/2015?v=4",
-        "name": "Shawn Roske",
-        "company": "space150",
-        "blog": "http://www.space150.com",
-        "location": "Los Angeles, CA",
-    },
-    {
-        "key": 2016,
-        "avatar_url": "https://avatars1.githubusercontent.com/u/2016?v=4",
-        "name": "Tammer Saleh",
-        "company": "@superorbital ",
-        "blog": "http://superorbit.al",
-        "location": "California, USA",
-    }
-];
+
 
 const Card = (props) => {
     return (
@@ -45,7 +21,6 @@ const Card = (props) => {
 
 
 const ListCards = (props) => {
-    console.log(props.cards);
     return (
         <div>
             {props.cards.map(card => <Card {...card}/>)}
@@ -55,22 +30,43 @@ const ListCards = (props) => {
 
 class FormCard extends React.Component{
 
-    render(){
+    render(props){
         return (
-            <div>
-            Form card
-            </div>
+            <form>
+                <input type="text" placeholder="Github user"></input>
+                <button type="Submit">Add Card</button>
+            </form>
         );
     }
 }
 
 class App extends React.Component {
 
+    state = {
+        cards: [{
+            "key": 2013, 
+            "avatar_url": "https://avatars1.githubusercontent.com/u/2013?v=4",
+            "name": "Jeff Smith",
+            "company": null,
+            "blog": "http://jeffsmith.me",
+            "location": "Amherst, Nova Scotia",
+             },
+            {
+                "key": 2015,
+                "avatar_url": "https://avatars1.githubusercontent.com/u/2015?v=4",
+                "name": "Shawn Roske",
+                "company": "space150",
+                "blog": "http://www.space150.com",
+                "location": "Los Angeles, CA",
+            }
+        ]
+    };
+
     render() {
         return (
             <div>
                 <FormCard/>
-                <ListCards cards= {data}></ListCards>
+                <ListCards cards= {this.state.cards}></ListCards>
             </div>
         );
     }
