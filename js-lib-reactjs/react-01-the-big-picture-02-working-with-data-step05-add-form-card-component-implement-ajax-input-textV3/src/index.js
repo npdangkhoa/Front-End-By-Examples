@@ -32,20 +32,24 @@ const ListCards = (props) => {
 
 class FormCard extends React.Component{
 
+    state = {
+        userName: ''
+    }
     handleSubmit = (event)=>{
         event.preventDefault();
-        console.log("handle Submit" + this.userName.value);
-        axios.get("https://api.github.com/users/"+ this.userName.value)
+        console.log("handle Submit: " + this.state.userName);
+        axios.get("https://api.github.com/users/"+ this.state.userName)
         .then((resp)=> {
             console.log(JSON.stringify(resp));
         })
     }
 
 
-    render(props){
+    render(){
         return (
             <form onSubmit= {this.handleSubmit}>
-                <input type="text" name="userName"  ref = {(input)=> {this.userName = input}}
+                <input type="text" name="userName" value={this.state.userName}
+                onChange = {(event)=> {this.setState({userName: event.target.value})}}
                 placeholder="Github user"></input>
                 <button type="Submit">Add Card</button>
             </form>
