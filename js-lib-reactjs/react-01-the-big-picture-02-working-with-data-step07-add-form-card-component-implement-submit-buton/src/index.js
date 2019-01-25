@@ -23,7 +23,6 @@ const Card = (props) => {
 
 
 const ListCards = (props) => {
-    console.log(props);
     return (
         <div>
             {props.cards.map(card => <Card {...card}/>)}
@@ -32,28 +31,26 @@ const ListCards = (props) => {
 }
 
 class FormCard extends React.Component{
-    state = {userName: ''}
+
+    state = {userName: ""}
+
     handleSubmit = (event)=>{
-        //event.preventDefault();
+        event.preventDefault();
         console.log("handle Submit: " + this.state.userName);
         axios.get(`https://api.github.com/users/${this.state.userName}`)
         .then((resp)=> {
-           // console.log(JSON.stringify(resp));
-            //console.log("props: "+ this.props);
+            console.log("handle submit: response data: " + JSON.stringify(resp));
             this.props.onSubmit(resp.data);
-            this.setState({userName: ''});
         })
     }
 
 
-    render(props){
+
+    render(){
         return (
             <form onSubmit= {this.handleSubmit}>
-                <input type="text" 
-                name="userName" 
-                value={this.userName.value}
-                onChange={(event)=> this.}
-                ref = {(input)=> {this.userName = input}}
+                <input type="text" name="userName" value={this.state.userName}
+                onChange = {(event)=> {this.setState({userName: event.target.value})}}
                 placeholder="Github user"></input>
                 <button type="Submit">Add Card</button>
             </form>
@@ -84,16 +81,15 @@ class App extends React.Component {
         ]
     };
 
+    //TODO: need to verify this structure "preState => ({ cards:preState.cards.concat(newCard)   }) "
+    //TODO: need to verify this Error structure "preState => { cards:preState.cards.concat(newCard)   } "
+
     addNewCard = (newCard) => {
-        this.setState(preState => {
-            //console.log("preState" + JSON.stringify(preState));
-            //console.log("newCard" + JSON.stringify(newCard) );
-            preState.cards.push(newCard)
-        })
+        this.setState(preState => ({
+            cards:preState.cards.concat(newCard)
+        }));
+    };
 
-        //console.log(this.state.cards);
-
-    }
     render() {
         return (
             <div>
