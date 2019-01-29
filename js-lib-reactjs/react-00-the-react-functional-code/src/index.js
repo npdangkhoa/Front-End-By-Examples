@@ -8,6 +8,12 @@ import './../node_modules/bootstrap/dist/css/bootstrap.css'
 
 import * as serviceWorker from './serviceWorker';
 
+const Continue = () => {
+    return (
+        <div>Continue</div>
+    );
+}
+
 const Book = ({tittle}) => {
     return (
         <div className="answer" key="1">
@@ -18,10 +24,19 @@ const Book = ({tittle}) => {
 
 // there are 2 way to pass parameter into method
 //const Turn = (props) => {
-const Turn = ({author, books}) => {
+const Turn = ({author, books, hightlight}) => {
+    function hightlightToBgColor(hightlight){
+        const map = {
+            'none': '',
+            'correct': 'green',
+            'wrong': 'red'
+        };
+
+        return map[hightlight];
+    }
     return (
-        <div className="row turn">
-            <div className="col-4 offset-1" style={{background:'white'}}>
+        <div className="row turn" style={{background: hightlightToBgColor(hightlight)}}>
+            <div className="col-4 offset-1">
                 <img className= 'authorimage' alt='Author' src={author.imageUrl}></img>
             </div>
             <div className="col-6">
@@ -32,11 +47,7 @@ const Turn = ({author, books}) => {
 }
 
 
-const Continue = () => {
-    return (
-        <div>Continue</div>
-    );
-}
+
 
 // define the header of website
 const Header = () => {
@@ -72,7 +83,7 @@ class AuthorQuiz extends Component {
         return (
             <div>
                 <Header></Header>
-                <Turn {...this.props.turnData}></Turn>
+                <Turn {...this.props.turnData} hightlight={this.props.hightlight}></Turn>
                 <Continue></Continue>
                 <Footer></Footer>
             </div>
@@ -145,7 +156,8 @@ const getTurnData = (authors) => {
 }
 
 const state ={
-    turnData: getTurnData(authors)
+    turnData: getTurnData(authors),
+    hightlight: 'correct'
 };
 
 
