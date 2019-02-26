@@ -157,27 +157,19 @@ const getTurnData = (authors) => {
 
 const state ={
     turnData: getTurnData(authors),
-    hightlight: ''
+    hightlight: 'correct'
 };
 
 
-const onClickBookTab= (pTitle) => {
-    console.log(pTitle);    
-    const iscorrect = state.turnData.author.books.some((book) => book === pTitle);
-    state.hightlight = iscorrect  ? 'correct' : 'wrong';
-
-    // reRender content when after choose aswer
-   render();
-
+const onClickBookTab= (title) => {
+    console.log(title);    
 }
 
 
-function render(){
-    ReactDOM.render(<AuthorQuiz  {... state} onClickBookTab={onClickBookTab}/>, document.getElementById('root'));
 
-}
+ReactDOM.render(<AuthorQuiz  {... state} onClickBookTab={onClickBookTab}/>, document.getElementById('root'));
 
-render();
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
